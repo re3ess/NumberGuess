@@ -16,6 +16,7 @@ let chanceArea = document.getElementById('chance-area');
 let resetButton = document.getElementById('reset-button');
 let chances = 5;
 let gameOver = false;
+let gameWin = false;
 let history = [];
 
 playButton.addEventListener('click', play);
@@ -27,6 +28,7 @@ userInput.addEventListener('focus', () => {
 function randomNum() {
   computerNum = Math.floor(Math.random() * 100) + 1;
   console.log('정답', computerNum);
+  gameWin = false;
   gameOver = false;
   playButton.disabled = false;
 }
@@ -45,7 +47,7 @@ function play() {
   }
 
   chances--;
-  chanceArea.textContent = `남은 기회: ${chances}번`;
+  chanceArea.textContent = `남은 기회 : ${chances}`;
 
   if (userValue < computerNum) {
     resultArea.textContent = 'Up';
@@ -53,7 +55,7 @@ function play() {
     resultArea.textContent = 'Down';
   } else {
     resultArea.textContent = '정답!';
-    gameOver = true;
+    gameWin = true;
   }
 
   history.push(userValue);
@@ -64,12 +66,21 @@ function play() {
   }
   if (gameOver === true) {
     playButton.disabled = true;
+    resultArea.textContent = '땅구니의 패배 !';
+  }
+  if (gameWin === true) {
+    playButton.disabled = true;
+    resultArea.textContent = '땅구니의 승리 !';
   }
 }
 
 function reset() {
   // user input 창이 깨끗하게 정리되고
   userInput.value = '';
+  resultArea.textContent = '　';
+  history = [];
+  chances = 5;
+  chanceArea.textContent = `남은 기회 : ${chances}`;
   // 새로운 번호가 생성이 되고
   randomNum();
 }
