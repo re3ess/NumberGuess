@@ -66,11 +66,11 @@ function play() {
   }
   if (gameOver === true) {
     playButton.disabled = true;
-    resultArea.textContent = '땅구니의 패배 !';
+    resultArea.textContent = '당신의 패배 😭';
   }
   if (gameWin === true) {
     playButton.disabled = true;
-    resultArea.textContent = '땅구니의 승리 !';
+    resultArea.textContent = '정답! 축하드려요 😆';
   }
 }
 
